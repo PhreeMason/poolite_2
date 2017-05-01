@@ -10,7 +10,10 @@
    <% end %>
  </nav>
 </div>
-
+<h3>Log In</h3>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <% if @restrooms %>
   <h2>Review A Restroom</h2>
   <form action="/new/review" method="post"></p>

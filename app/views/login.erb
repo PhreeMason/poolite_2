@@ -17,6 +17,7 @@
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
+
 <form action="/login" method="POST">
   <p><input type="text" name="username" placeholder="Username:" required></p>
   <p><input type="password" name="password" placeholder="Password:" required></p>
