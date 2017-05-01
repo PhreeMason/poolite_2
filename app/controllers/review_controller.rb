@@ -4,7 +4,8 @@ class ReviewController < ApplicationController
    get '/review/new' do
      if logged_in?
        @user = current_user
-       @my_review = logged_in?
+       @logged = logged_in?
+       @restrooms = Restroom.all
        erb :'/review/write_review'
      else
        redirect to '/login'
@@ -25,11 +26,15 @@ class ReviewController < ApplicationController
    post '/new/review' do
      if !params[:review][:body].blank?
        @user = current_user
-       review =review.create(params[:review])
+       review =Review.create(params[:review])
+
+       if !params[:restroom][:restaurant_name].blank? && !params[:restroom][:location].blank?
+         review.restroom = Restroom.create(params[:restroom])
+       end
        review.save
-       redirect to '/review'
+       redirect to "/review/#{review.id}"
      else
-       @my_review = my_review?(@review)
+       @my_review = my_review?(review)
        redirect to '/review/new'
      end
    end

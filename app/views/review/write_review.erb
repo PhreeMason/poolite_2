@@ -11,11 +11,29 @@
  </nav>
 </div>
 
-
-<form action="/new/review" method="post">
-  <input type="text" name="review[body]" value="">
-  <input type="hidden" name="review[user_id]" value="<%=@user.id%>">
-  <input type="submit" value="Create Review">
+<h2>Review A Restroom</h2>
+<form action="/new/review" method="post"></p>
+  <p>Choose an existing location</p>
+  <% if !@restrooms.blank? %>
+    <% for item in @restrooms %>
+    <p><input type="checkbox" name="review[restroom_id]" value="<%=item.id%>"><%=item.restaurant_name%></input></p>
+    <% end %>
+  <% end %>
+  <p>Or Add a new location</p>
+  <p>Name: </p>
+  <p><input type="text" name="restroom[restaurant_name]" value=""></p>
+  <p>Location: </p>
+  <p><input type="text" name="restroom[location]" value=""></p>
+  <p>Write Review Here:</p>
+  <input type="text" name="review[body]" class="review body">
+  <p>Rating: </p>
+  <ol>
+    <% for item in (0..4) %>
+      <li><input type="checkbox" name="review[stars]" value="<%=item+1%>"></li>
+    <% end %>
+  </ol>
+  <p><input type="hidden" name="review[user_id]" value="<%=@user.id%>"></p>
+  <p><input type="submit" value="Create Review"></p>
 </form>
 
 
