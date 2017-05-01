@@ -11,10 +11,11 @@
  </nav>
 </div>
 <h1><%= @restroom.restaurant_name%> <%=@restroom.rating%></h1>
+<h2><%=@restroom.location%></h2>
 
 <% if !@restroom.reviews.blank? %>
   <% for item in @restroom.reviews %>
-  <%=item.user.username%> Rating: <%=item.stars%>
+  <h3><%=item.user.username%> Rating: <%=item.stars%> Star(s)</h3>
     <a href="/review/<%=item.id%>">
       <div class="">
         <h4>
