@@ -1,5 +1,5 @@
-require "./config/environment"
-require "./app/models/user"
+require 'rack-flash'
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -7,6 +7,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "password_security"
   end
+  use Rack::Flash
 
   get "/" do
     if logged_in?
@@ -22,7 +23,7 @@ class ApplicationController < Sinatra::Base
 
   get "/signup" do
     if logged_in?
-      redirect to "user/#{current_user.id}"
+      redirect to "user/#{current_user.slug}"
     else
       erb :signup
     end
@@ -31,12 +32,12 @@ class ApplicationController < Sinatra::Base
   post "/signup" do
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     session[:user_id] = @user.id
-    redirect to "user/#{@user.id}"
+    redirect to "user/#{@user.slug}"
   end
 
   get "/login" do
     if logged_in?
-      redirect to "user/#{current_user.id}"
+      redirect to "user/#{current_user.slug}"
     else
       erb :login
     end
@@ -47,8 +48,9 @@ class ApplicationController < Sinatra::Base
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       @user = user
-      redirect "user/#{@user.id}"
+      redirect "user/#{@user.slug}"
     else
+      flash[:message] = "Hmmm something went wrong lets try that again."
       redirect "/login"
     end
   end

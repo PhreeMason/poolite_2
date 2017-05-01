@@ -23,3 +23,9 @@
   <script type="text/javascript" src="/public/jquery.js">
   </script>
 </body>
+
+<% if @logged %>
+  <p><a href="/logout">Log out</a></p>
+<% else %>
+  <p><a href="/login">Log In</a>
+<% end %>

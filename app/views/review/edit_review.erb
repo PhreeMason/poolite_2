@@ -11,7 +11,19 @@
  </nav>
 </div>
 
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<h2><%=@review.restroom.restaurant_name%></h2>
+<h3>Edit Review:</h3>
 <form action="/review/<%=@review.id%>/edit" method="post">
+  <p>Rating: </p>
+  <ol>
+    <% for item in (0..4) %>
+      <li><input type="checkbox" name="review[stars]" value="<%=item+1%>"></li>
+    <% end %>
+  </ol>
+  <p>Edit:</p>
   <input type="text" name="review[body]"  value="<%=@review.body%>">
   <input type="submit" value="submit">
 </form>
