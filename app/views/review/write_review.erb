@@ -1,0 +1,8 @@
+<form action="/new/review" method="post">
+  <input type="text" name="review[body]" value="">
+  <input type="hidden" name="review[user_id]" value="<%=@user.id%>">
+  <input type="submit" value="Create Review">
+</form>
+
+
+<a href="/logout">Log out</a>

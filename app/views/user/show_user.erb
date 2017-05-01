@@ -1,0 +1,30 @@
+<nav>
+  <a href="/restrooms">Restrooms</a>
+</nav>
+
+<!-- <div class="wrapper">
+ <div id="logo">
+   <h1>Poolite</h1>
+ </div>
+ <nav>
+   <a href="/">Home</a> <a href="new-properties.html">New Properties</a> <a href="real-estate-listings.html">Listings</a> <a href="market-report.html">Market Report</a> <a href="contact.html">Contact</a> <a href="http://hud.gov" target="_blank">H.U.D.</a>
+ </nav>
+</div>.wrapper -->
+
+<h1><%= @user.username%></h1>
+<% if !@user.reviews.blank? %>
+  <% for item in @user.reviews %>
+    <a href="review/<%=item.id%>">
+      <div class="">
+        <h4>
+          <%=item.restroom.restaurant_name%>
+        </h4>
+        <h4><%=item.body%></h4>
+      </div>
+    </a>
+  <% end %>
+<% else %>
+  <h3>Oh no you haven't reviewed any restrooms yet!</h3>
+<% end %>
+
+<a href="/logout">Log out</a>

@@ -1,0 +1,20 @@
+<h1>Welcome to Poolite</h1>
+<h2>Every poo should be polite</h2>
+
+<% if !@restrooms.blank? %>
+  <% for item in @restrooms %>
+    <h3><%=item.restaurant_name%></h3>
+    <h4><%=item.location%></h4>
+    <%=item.reviews.first%>
+  <% end %>
+<% else %>
+
+<% end %>
+
+
+<% if @logged %>
+  <p><a href="/logout">Log out</a></p>
+<% else %>
+  <a href="/login">Log In</a>
+  <a href="/signup">Sign Up</a>
+<% end %>

@@ -1,0 +1,6 @@
+<form action="/review/<%=@review.id%>/edit" method="post">
+  <input type="text" name="review[body]"  value="<%=@review.body%>">
+  <input type="submit" value="submit">
+</form>
+
+<a href="/logout">Log out</a>
