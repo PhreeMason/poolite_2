@@ -1,20 +1,20 @@
-<nav>
-  <a href="/restrooms">Restrooms</a>
-</nav>
-
-<!-- <div class="wrapper">
+<div class="wrapper">
  <div id="logo">
    <h1>Poolite</h1>
  </div>
  <nav>
-   <a href="/">Home</a> <a href="new-properties.html">New Properties</a> <a href="real-estate-listings.html">Listings</a> <a href="market-report.html">Market Report</a> <a href="contact.html">Contact</a> <a href="http://hud.gov" target="_blank">H.U.D.</a>
+   <% if @logged %>
+    <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+   <% else %>
+    <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+   <% end %>
  </nav>
-</div>.wrapper -->
+</div>
 
-<h1><%= @user.username%></h1>
-<% if !@user.reviews.blank? %>
-  <% for item in @user.reviews %>
-    <a href="review/<%=item.id%>">
+<h1><%= @profile.username%></h1>
+<% if !@profile.reviews.blank? %>
+  <% for item in @profile.reviews %>
+    <a href="/review/<%=item.id%>">
       <div class="">
         <h4>
           <%=item.restroom.restaurant_name%>

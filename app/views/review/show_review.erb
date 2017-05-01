@@ -1,9 +1,19 @@
-<% if @review %>
-  <h2><a href="/user/<%=@review.user.id%>"><%=@review.user.username%></a></h2>
-  <h3><a href="/restrooms/<%=@review.restroom.id%>"><%=@review.restroom.restaurant_name%></a></h3>
-  <h2><%=@review.user.username%></h2>
-  <h3><%=@review.restroom.restaurant_name%></h3>
+<div class="wrapper">
+ <div id="logo">
+   <h1>Poolite</h1>
+ </div>
+ <nav>
+   <% if @logged %>
+    <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+   <% else %>
+     <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+   <% end %>
+ </nav>
+</div>
 
+<% if @review %>
+  <h2><a href="/user/<%=@review.user.slug%>"><%=@review.user.username%></a></h2>
+  <h3><a href="/restrooms/<%=@review.restroom.id%>"><%=@review.restroom.restaurant_name%></a></h3>
   <h4><%=@review.body%></h4>
 <% end %>
 

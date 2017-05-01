@@ -1,3 +1,16 @@
+<div class="wrapper">
+ <div id="logo">
+   <h1>Poolite</h1>
+ </div>
+ <nav>
+   <% if @logged %>
+    <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+   <% else %>
+     <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+   <% end %>
+ </nav>
+</div>
+
 <h1>Welcome <%= @user.username%></h1>
 <nav>
   <a href="/restrooms">Restrooms</a>

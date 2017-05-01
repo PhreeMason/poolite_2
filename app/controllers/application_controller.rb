@@ -9,9 +9,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    @restrooms = Restroom.all
-    @logged = logged_in?
-    erb :index
+    if logged_in?
+      @restrooms = Restroom.all
+      @logged = logged_in?
+      @user = current_user
+      erb :index
+    else
+      @restrooms = Restroom.all
+      erb :index
+    end
   end
 
   get "/signup" do

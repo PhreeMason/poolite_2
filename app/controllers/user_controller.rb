@@ -1,9 +1,10 @@
 class UserController < ApplicationController
 
-  get '/user/:id' do
+  get '/user/:slug' do
     if logged_in?
-      @user= User.find(params[:id])
-      if @user.id == current_user.id
+      @user = current_user
+      @profile= User.findby_slug(params[:slug])
+      if @profile.id == @user.id
         @logged = logged_in?
         erb :'/user/profile'
       else

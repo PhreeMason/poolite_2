@@ -13,6 +13,7 @@ class ReviewController < ApplicationController
 
    get '/review/:id' do
      if logged_in?
+       @user = current_user
        @review = Review.find(params[:id])
        @my_review = my_review?(@review)
        erb :'/review/show_review'
@@ -23,6 +24,7 @@ class ReviewController < ApplicationController
 
    post '/new/review' do
      if !params[:review][:body].blank?
+       @user = current_user
        review =review.create(params[:review])
        review.save
        redirect to '/review'
@@ -34,6 +36,7 @@ class ReviewController < ApplicationController
 
    post '/delete/:id' do
      if logged_in?
+       @user = current_user
        @review = Review.find(params[:id])
        if current_user.reviews.include?(@review)
          @review.destroy
@@ -47,6 +50,7 @@ class ReviewController < ApplicationController
 
    get '/review/:id/edit' do
      if logged_in?
+       @user = current_user
        @review = Review.find(params[:id])
        @my_review = my_review?(@review)
        erb :'/review/edit_review'
@@ -57,6 +61,7 @@ class ReviewController < ApplicationController
 
    post '/review/:id/edit' do
      if !params[:review][:body].blank?
+       @user = current_user
        @review= Review.find(params[:id])
        if current_user.reviews.include?(@review)
          @review.update(params[:review])
