@@ -1,6 +1,9 @@
 <div class="wrapper">
  <div id="logo">
    <h1>Poolite</h1>
+   <% if flash.has?(:message) %>
+     <%= flash[:message] %>
+   <% end %>
  </div>
  <nav>
    <% if @logged %>

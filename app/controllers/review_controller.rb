@@ -55,17 +55,22 @@ class ReviewController < ApplicationController
 
    get '/review/:id/edit' do
      if logged_in?
-       @user = current_user
        @review = Review.find(params[:id])
        @my_review = my_review?(@review)
-       erb :'/review/edit_review'
+       if my_review?(@review)
+         @user = current_user
+         erb :'/review/edit_review'
+       else
+         flash[:message] = "You can't edit a review you did not create."
+         redirect to "/review/#{@review.id}"
+       end
      else
        redirect to '/login'
      end
    end
 
    post '/review/:id/edit' do
-     if !params[:review][:body].blank?
+     if !params[:review][:body].blank? && !params[:review][:stars].blank?
        @user = current_user
        @review= Review.find(params[:id])
        if current_user.reviews.include?(@review)
@@ -74,6 +79,7 @@ class ReviewController < ApplicationController
        @my_review = my_review?(@review)
        redirect to "review/#{@review.id}"
      else
+       flash[:message] = "Please choose a star raiting"
        redirect to "/review/#{@review.id}/edit"
      end
    end
