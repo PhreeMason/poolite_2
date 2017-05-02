@@ -28,4 +28,10 @@
   <h3>Oh no you haven't reviewed any restrooms yet!</h3>
 <% end %>
 
-<a href="/logout">Log out</a>
+
+<% if @logged %>
+  <p><a href="/logout">Log out</a></p>
+<% else %>
+  <p><a href="/login">Log In</a>
+  <a href="/signup">Sign Up</a></p>
+<% end %>
