@@ -50,6 +50,8 @@ body {
   <h2>Write a review for <%=@restroom.restaurant_name%> below</h2>
   <form action="/new/review" method="post"></p>
     <input type="hidden" name="review[restroom_id]" value="<%=@restroom.id%>">
+    <input type="hidden" name="restroom[restaurant_name]" value="">
+    <input type="hidden" name="restroom[location]" value="">
     <input type="text" name="review[body]" class="review body" required>
     <p>Rating: </p>
 
