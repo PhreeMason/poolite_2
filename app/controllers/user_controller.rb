@@ -11,7 +11,9 @@ class UserController < ApplicationController
         erb :'user/show_user'
       end
     else
-      redirect to '/login'
+      @profile= User.findby_slug(params[:slug])
+      @logged = logged_in?
+      erb :'user/show_user'
     end
   end
 
