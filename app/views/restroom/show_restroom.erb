@@ -29,5 +29,8 @@
 <% end %>
 
 <% if @logged %>
-  <a href="/logout">Log out</a>
+  <p><a href="/logout">Log out</a></p>
+<% else %>
+  <p><a href="/login">Log In</a>
+  <a href="/signup">Sign Up</a></p>
 <% end %>

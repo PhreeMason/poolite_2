@@ -29,4 +29,9 @@
   <a href="/review/<%=@review.id%>/edit">Edit</a>
 <% end %>
 
-<a href="/logout">Log out</a>
+<% if @logged %>
+  <p><a href="/logout">Log out</a></p>
+<% else %>
+  <p><a href="/login">Log In</a>
+  <a href="/signup">Sign Up</a></p>
+<% end %>
