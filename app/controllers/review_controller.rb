@@ -19,7 +19,8 @@ class ReviewController < ApplicationController
        @logged = logged_in?
        erb :'/review/write_review'
      else
-       redirect to '/login'
+       @restroom = params[:id]
+       erb :login
      end
   end
 

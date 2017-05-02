@@ -21,6 +21,7 @@
 <form action="/login" method="POST">
   <p><input type="text" name="username" placeholder="Username:" required></p>
   <p><input type="password" name="password" placeholder="Password:" required></p>
+  <p><input type="hidden" name="restroom" value="<%=@restroom%>"></p>
   <p><input type="submit" value="Log In"></p>
 </form>
 

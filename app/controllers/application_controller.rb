@@ -44,11 +44,16 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/login" do
+    binding.pry
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       @user = user
-      redirect "user/#{@user.slug}"
+      if !params[:restroom].blank?
+        redirect to "/review/new/#{params[:restroom]}"
+      else
+        redirect "user/#{@user.slug}"
+      end
     else
       flash[:message] = "Hmmm something went wrong lets try that again."
       redirect "/login"

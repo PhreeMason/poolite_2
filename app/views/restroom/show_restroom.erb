@@ -6,7 +6,7 @@
    <% if @logged %>
     <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new/<%=@restroom.id%>">Write A Review</a> <a href="/restroom">Restrooms</a>
    <% else %>
-     <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restroom">Restrooms</a>
+     <a href="/">Home</a> <a href="/review/new/<%=@restroom.id%>">Write A Review</a> <a href="/restroom">Restrooms</a>
    <% end %>
  </nav>
 </div>
