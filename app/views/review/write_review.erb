@@ -6,18 +6,18 @@ body {
 </style>
 </head>
 <center>
-<div class="wrapper">
- <div id="logo">
-   <h1>Poolite</h1>
- </div>
- <nav>
-   <% if @logged %>
-    <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-   <% else %>
-     <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-   <% end %>
- </nav>
-</div>
+  <div class="wrapper">
+   <div id="logo">
+     <h1>Poolite</h1>
+   </div>
+   <nav>
+     <% if @logged %>
+      <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
+     <% else %>
+       <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
+     <% end %>
+   </nav>
+  </div>
 
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
@@ -40,11 +40,9 @@ body {
       <p>Write Review Here:</p>
       <input type="text" name="review[body]" class="review body" required>
       <p>Rating: </p>
-      <ol>
-        <% for item in (0..4) %>
-        <li><input type="checkbox" name="review[stars]" value="<%=item+1%>"></li>
-        <% end %>
-      </ol>
+      <% for item in (0..4) %>
+      <input type="checkbox" name="review[stars]" value="<%=item+1%>"><%=item+1%>
+      <% end %>
       <p><input type="hidden" name="review[user_id]" value="<%=@user.id%>"></p>
       <p><input type="submit" value="Create Review"></p>
     </form>
@@ -54,11 +52,10 @@ body {
     <input type="hidden" name="review[restroom_id]" value="<%=@restroom.id%>">
     <input type="text" name="review[body]" class="review body" required>
     <p>Rating: </p>
-    <ol>
+
       <% for item in (0..4) %>
-      <li><input type="checkbox" name="review[stars]" value="<%=item+1%>"></li>
+      <input type="checkbox" name="review[stars]" value="<%=item+1%>"><%=item+1%>
       <% end %>
-    </ol>
     <p><input type="hidden" name="review[user_id]" value="<%=@user.id%>"></p>
     <p><input type="submit" value="Create Review"></p>
     </form>
