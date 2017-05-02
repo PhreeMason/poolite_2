@@ -1,6 +1,7 @@
 # poolite_2
 A copy of poolite without all the extra files from merger issues with GitHub.
 The original can be found here https://github.com/PhreeMason/poolite.
+This site is made for reviewing restuarant bathrooms so that potential customers can know what to expect before visiting. I think the cleanliness and overall experience of using a restuarant's bathroom is just as important as having a good food.
 
 ## Installation
 
