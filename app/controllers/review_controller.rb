@@ -28,10 +28,13 @@ class ReviewController < ApplicationController
      if logged_in?
        @user = current_user
        @review = Review.find(params[:id])
+       @logged = logged_in?
        @my_review = my_review?(@review)
        erb :'/review/show_review'
      else
-       redirect to '/login'
+      @logged = logged_in?
+      @review = Review.find(params[:id])
+      erb :'/review/show_review'
      end
    end
 
