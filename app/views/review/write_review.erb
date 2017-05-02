@@ -54,7 +54,6 @@ body {
     <input type="hidden" name="restroom[location]" value="">
     <input type="text" name="review[body]" class="review body" required>
     <p>Rating: </p>
-
       <% for item in (0..4) %>
       <input type="checkbox" name="review[stars]" value="<%=item+1%>"><%=item+1%>
       <% end %>
