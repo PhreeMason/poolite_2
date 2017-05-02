@@ -1,6 +1,7 @@
 <div class="wrapper">
  <div id="logo">
    <h1>Poolite</h1>
+   <h2>Every poo should be polite</h2>
  </div>
  <nav>
    <% if @logged %>
@@ -10,15 +11,13 @@
    <% end %>
  </nav>
 </div>
-
-<h2>Every poo should be polite</h2>
-
+<h3>Featured Reviews</h3>
 <% if !@restrooms.blank? %>
   <% for item in @restrooms %>
-  <h3><%=item.restaurant_name%> <%=item.rating%> Stars</h3>
+  <h4><%=item.restaurant_name%> <%=item.rating%> Stars</h4>
     <a href="/restrooms/<%=item.id%>">
       <div class="index page">
-        <h4><%=item.location%></h4>
+        <h5><%=item.location%></h5>
         <%=item.reviews.sample.body%>
       </div>
     </a>
