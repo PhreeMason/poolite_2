@@ -69,7 +69,7 @@ class ReviewController < ApplicationController
          @review.destroy
        end
        @my_review = my_review?(@review)
-       redirect to "/user/#{current_user.id}"
+       redirect to "/user/#{current_user.slug}"
      else
        redirect to '/login'
      end
