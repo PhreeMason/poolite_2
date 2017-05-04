@@ -31,6 +31,7 @@ body {
 
 <% if @my_review %>
   <form class="" action="/delete/<%=@review.id%>" method="post">
+    <input type="hidden" name="_method" value="delete" />s
     <input type="submit" value="Delete">
   </form>
 

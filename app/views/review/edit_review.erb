@@ -24,7 +24,8 @@ body {
 <% end %>
 <h2><%=@review.restroom.restaurant_name%></h2>
 <h3>Edit Review:</h3>
-<form action="/review/<%=@review.id%>/edit" method="post">
+<form action="/review/<%=@review.id%>" method="post">
+  <input type="hidden" name="_method" value="put" />s
   <p>Rating: </p>
     <% for item in (0..4) %>
     <input type="checkbox" name="review[stars]" value="<%=item+1%>"><%=item+1%>

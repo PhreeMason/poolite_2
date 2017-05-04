@@ -3,8 +3,6 @@ class ReviewController < ApplicationController
 
    get '/review/new' do
      if logged_in?
-       @user = current_user
-       @logged = logged_in?
        @restrooms = Restroom.all
        erb :'/review/write_review'
      else
@@ -12,11 +10,9 @@ class ReviewController < ApplicationController
      end
    end
 
-   get '/review/new/:id' do
+   get '/restrooms/:restroom_id/review/new' do
      if logged_in?
-       @restroom = Restroom.find(params[:id])
-       @user = current_user
-       @logged = logged_in?
+       @restroom = Restroom.find_by(id: params[:restroom_id])
        erb :'/review/write_review'
      else
        @restroom = params[:id]
@@ -26,7 +22,6 @@ class ReviewController < ApplicationController
 
    get '/review/:id' do
      if logged_in?
-       @user = current_user
        @review = Review.find(params[:id])
        @logged = logged_in?
        @my_review = my_review?(@review)
@@ -38,17 +33,20 @@ class ReviewController < ApplicationController
      end
    end
 
-   post '/new/review' do
+   post '/restrooms/:restroom_id/reviews' do
      if !params[:review][:stars].blank?
-       @user = current_user
-       review =Review.create(params[:review])
+       review = current_user.reviews.build(params[:review])
+       review.restroom_id = params[]
 
        if !params[:restroom][:restaurant_name].blank? && !params[:restroom][:location].blank?
          review.restroom = Restroom.create(params[:restroom])
        end
 
-       review.save
-       redirect to "/review/#{review.id}"
+       if review.save
+         redirect to "/review/#{review.id}"
+       else
+         redirect to '/review/new'
+       end
      else
       if !params[:review][:restroom_id].blank?
         flash[:message] = "Hmm it seems you forgot to put a star rating."
@@ -61,9 +59,8 @@ class ReviewController < ApplicationController
      end
    end
 
-   post '/delete/:id' do
+   delete '/delete/:id' do
      if logged_in?
-       @user = current_user
        @review = Review.find(params[:id])
        if current_user.reviews.include?(@review)
          @review.destroy
@@ -75,7 +72,7 @@ class ReviewController < ApplicationController
      end
    end
 
-   get '/review/:id/edit' do
+   get '/reviews/:id/edit' do
      if logged_in?
        @review = Review.find(params[:id])
        @my_review = my_review?(@review)
@@ -91,7 +88,7 @@ class ReviewController < ApplicationController
      end
    end
 
-   post '/review/:id/edit' do
+   put '/review/:id' do
      if !params[:review][:body].blank? && !params[:review][:stars].blank?
        @user = current_user
        @review= Review.find(params[:id])
@@ -105,6 +102,5 @@ class ReviewController < ApplicationController
        redirect to "/review/#{@review.id}/edit"
      end
    end
-
 
 end

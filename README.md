@@ -9,8 +9,9 @@ This site is made for reviewing restuarant bathrooms so that potential customers
 2. Navigate to Poolite_2 folder in Terminal
 3. Run gem install bundler
 4. Run bundle install
-5. Run shotgun
-6. Open the url given by shotgun in your internet browser.
+5. Run rake db:migrate & rake db:seed
+6. Run shotgun
+7. Open the url given by shotgun in your internet browser.
 
 ## License
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="wrapper">
+     <div id="logo">
+       <h1>Poolite</h1>
+     </div>
+     <nav>
+       <% if logged_in? %>
+        <a href="/">Home</a> <a href="/user/<%= current_user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
+       <% else %>
+         <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
+       <% end %>
+     </nav>
+    </div>
+
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
