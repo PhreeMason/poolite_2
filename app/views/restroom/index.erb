@@ -1,45 +1,15 @@
-<head>
-<style>
-body {
-    background-color:rgb(213, 114, 23);
-}
-</style>
-</head>
-<center>
-<div class="wrapper">
- <div id="logo">
-   <h1>Poolite</h1>
- </div>
- <nav>
-   <% if @logged %>
-    <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-   <% else %>
-     <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-   <% end %>
- </nav>
-</div>
-
 <% if !@restrooms.blank? %>
   <% for item in @restrooms %>
     <div class="">
       <h2><a href="/restrooms/<%=item.id%>"><%=item.restaurant_name%> Rating: <%=item.rating%></a></h2>
         <% if !item.reviews.blank? %>
-          <ul>
             <%review = item.reviews.sample%>
-            <li>
-              <a href="/review/<%=review.id%>">
-                <div class="">
-                  <h3><%="#{review.body} #{review.stars}"%></h3>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <% end %>
+            <a href="/review/<%=review.id%>">
+              <div class="">
+                <h3><%="#{review.body} #{review.stars}"%></h3>
+              </div>
+            </a>
+        <% end %>
     </div>
   <% end %>
 <% end %>
-
-<% if @logged %>
-  <a href="/logout">Log out</a>
-<% end %>
-</center>

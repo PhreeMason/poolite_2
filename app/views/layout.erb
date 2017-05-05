@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
+    <style>
+      body {
+        background-color:rgb(213, 114, 23);
+        }
+    </style>
   </head>
   <body>
 
@@ -12,17 +15,19 @@
      </div>
      <nav>
        <% if logged_in? %>
-        <a href="/">Home</a> <a href="/user/<%= current_user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
+        <a href="/">Home</a> <a href="/user/<%= current_user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a> <a href="/logout">Log out</a>
        <% else %>
-         <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
+         <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a> <a href="/login">Log In</a> <a href="/signup">Sign Up</a>
        <% end %>
      </nav>
     </div>
 
+
     <% if flash.has?(:message) %>
       <%= flash[:message] %>
     <% end %>
-
-    <%= yield %>
+    <center>
+      <%= yield %>
+    </center>
   </body>
 </html>

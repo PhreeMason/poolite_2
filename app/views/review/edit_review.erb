@@ -1,27 +1,3 @@
-<head>
-<style>
-body {
-    background-color:rgb(213, 114, 23);
-}
-</style>
-<center>
-</head>
-<div class="wrapper">
- <div id="logo">
-   <h1>Poolite</h1>
- </div>
- <nav>
-   <% if @logged %>
-    <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-   <% else %>
-     <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-   <% end %>
- </nav>
-</div>
-
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
 <h2><%=@review.restroom.restaurant_name%></h2>
 <h3>Edit Review:</h3>
 <form action="/review/<%=@review.id%>" method="post">
@@ -34,6 +10,3 @@ body {
   <input type="text" name="review[body]"  value="<%=@review.body%>">
   <input type="submit" value="submit">
 </form>
-
-<a href="/logout">Log out</a>
-</center>

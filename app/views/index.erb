@@ -1,27 +1,8 @@
-<head>
-<style>
-body {
-    background-color:rgb(213, 114, 23);
-}
-</style>
-</head>
-<center>
-  <div class="wrapper">
-   <div id="logo">
-     <h1>Poolite</h1>
-   </div>
-   <nav>
-     <% if @logged %>
-      <a href="/">Home</a> <a href="/user/<%=@user.slug%>">Profile</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-     <% else %>
-       <a href="/">Home</a> <a href="/review/new">Write A Review</a> <a href="/restrooms">Restrooms</a>
-     <% end %>
-   </nav>
-  </div>
 
 <% if !@restrooms.blank? %>
+  <h2>Featured Reviews</h2>
   <% for item in @restrooms %>
-  <h3><%=item.restaurant_name%> <%=item.rating%> Stars</h3>
+    <h3><%=item.restaurant_name%> <%=item.rating%> Stars</h3>
     <a href="/restrooms/<%=item.id%>">
       <div class="index page">
         <h4><%=item.location%></h4>
@@ -30,14 +11,5 @@ body {
     </a>
   <% end %>
 <% else %>
-
+  <h2>No one has written a review yet. Login and be the first!</h2>
 <% end %>
-
-
-<% if @logged %>
-  <p><a href="/logout">Log out</a></p>
-<% else %>
-  <p><a href="/login">Log In</a>
-  <a href="/signup">Sign Up</a></p>
-<% end %>
-</center>
