@@ -1,5 +1,5 @@
 ENV['SINATRA_ENV'] ||= "development"
-
+require 'active_support/inflector'
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 

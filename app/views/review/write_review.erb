@@ -1,39 +1,31 @@
   <h2>Review A Restroom</h2>
-<% if @restrooms %>
-  <form action="/new/review" method="post">
-    <% if !@restrooms.blank? %>
-      <p>Choose an existing location</p>
-      <% for item in @restrooms %>
-      <label for="restroom_id"><%=item.restaurant_name%></label><br>
-        <p><input type="checkbox" name="review[restroom_id]" value="<%=item.id%>"></input></p>
-      <% end %>
-    <% end %>
-    <p>Or Add a new location</p>
-    <label for="restaurant_name">Name: <label>
-    <p><input type="text" name="restroom[restaurant_name]" value=""></p>
-    <p>Location: </p>
-    <p><input type="text" name="restroom[location]" value=""></p>
-    <p>Write Review Here:</p>
-    <input type="text" name="review[body]" class="review body" required>
-    <p>Rating: </p>
+
+
+<form action="/review" method="post" id="review">
+  <% if !@restrooms.blank? %>
+    <p>Choose an existing location</p>
+    <select id="review[old_restroom]" name="review[old_restroom]">
+      <option value=""></option>
+      <%@restrooms.each do |restroom|%>
+        <option value="<%=restroom.restaurant_name%>"><%=restroom.restaurant_name%></option>
+      <%end%>
+    </select>
+  <% end %>
+  <p>Add A New Restroom</p>
+  <label for="name">Name: <label><br>
+  <input type="text" name="review[restroom_hash][restaurant_name]" id="name" value=""><br>
+  <label for="location">Location: </label><br>
+  <input type="text" name="review[restroom_hash][location]" id="location" value=""><br>
+  <label for="body">Write Review Here:</label>
+  <br/>
+    <textarea name="review[body]" rows="4" cols="50" form="review" placeholder="Enter review here..."></textarea>
+  <p>Rating:
+  <select class="" name="review[stars]">
+    <option value=""></option>
     <% for item in (0..4) %>
-    <input type="checkbox" name="review[stars]" value="<%=item+1%>"><%=item+1%>
+      <option value="<%=item+1%>"><%=item+1%></option>
     <% end %>
-    <p><input type="hidden" name="review[user_id]" value="<%=@user.id%>"></p>
-    <p><input type="submit" value="Create Review"></p>
-  </form>
-<% else %>
-  <h2>Write a review for <%=@restroom.restaurant_name%> below</h2>
-  <form action="/new/review" method="post"></p>
-    <input type="hidden" name="review[restroom_id]" value="<%=@restroom.id%>">
-    <input type="hidden" name="restroom[restaurant_name]" value="">
-    <input type="hidden" name="restroom[location]" value="">
-    <input type="text" name="review[body]" class="review body" required>
-    <p>Rating: </p>
-      <% for item in (0..4) %>
-      <input type="checkbox" name="review[stars]" value="<%=item+1%>"><%=item+1%>
-      <% end %>
-    <p><input type="hidden" name="review[user_id]" value="<%=@user.id%>"></p>
-    <p><input type="submit" value="Create Review"></p>
-    </form>
-<% end %>
+  </select>
+  </p>
+  <p><input type="submit" value="Create Review"></p>
+</form>

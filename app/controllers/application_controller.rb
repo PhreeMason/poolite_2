@@ -22,19 +22,37 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+      if session[:user_id]
+        @current_user ||= User.find_by(id: session[:user_id])
+      end
     end
 
     def logged_in?
       !!current_user
     end
 
-    def my_review?(review)
-      current_user.reviews.include?(review)
-    end
-
     def case_space(string)
       string.gsub(/\s+/, "").downcase
+    end
+
+    def review_fail
+      flash[:message] = "Please make sure to choose a location or add a new one and also a star rating"
+      redirect to '/review/new'
+    end
+    def stars_bod?
+      !params[:review][:stars].blank? && !params[:review][:body].blank?
+    end
+    def one_resaturant?
+      if params[:review][:restroom_hash].values.none? {|a| a.empty?}
+        return true if params[:review][:old_restroom].empty?
+      elsif !params[:review][:old_restroom].empty?
+        return true if !params[:review][:restroom_hash].values.none? {|a| a.empty?}
+      else
+        false
+      end
+    end
+    def all_good?
+      stars_bod? && one_resaturant?
     end
 
   end

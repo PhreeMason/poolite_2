@@ -1,15 +1,14 @@
-<h1>Welcome <%= @user.username%></h1>
+<h2>Welcome <%= @profile.username%></h2>
 
-<% if !@user.reviews.blank? %>
-  <% for item in @user.reviews %>
-    <h3>
-      <%=item.restroom.restaurant_name%> <%=item.restroom.rating%> Stars
-    </h3>
-    <a href="/restrooms/<%=item.restroom.id%>">
-      <div class="">
-        <h4><%=item.body%></h4>
-      </div>
-    </a>
+<% if !@profile.reviews.blank? %>
+  <h3>Reviews</h3>
+  <% for item in @profile.reviews %>
+    <div class="revs">
+      <h4>
+        <a href="/restrooms/<%=item.restroom.id%>"><%=item.restroom.restaurant_name%></a>  <%=item.restroom.rating%>
+      </h4>
+      <p><%=item.body%></p>
+    </div>
   <% end %>
 <% else %>
   <h3>Oh no you haven't reviewed any restrooms yet!</h3>

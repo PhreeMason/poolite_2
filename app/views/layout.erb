@@ -3,8 +3,14 @@
   <head>
     <style>
       body {
-        background-color:rgb(213, 114, 23);
+        background-color:rgb(255, 255, 255);
         }
+        div.revs {
+    background-color: orange;
+    color: white;
+    margin: 20px 0 20px 0;
+    padding: 20px;
+  }
     </style>
   </head>
   <body>
@@ -23,10 +29,11 @@
     </div>
 
 
-    <% if flash.has?(:message) %>
-      <%= flash[:message] %>
-    <% end %>
+
     <center>
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %>
       <%= yield %>
     </center>
   </body>

@@ -1,14 +1,13 @@
+<h1>Restrooms</h1>
 <% if !@restrooms.blank? %>
   <% for item in @restrooms %>
-    <div class="">
-      <h2><a href="/restrooms/<%=item.id%>"><%=item.restaurant_name%> Rating: <%=item.rating%></a></h2>
+    <div class="revs">
+      <h2><a href="/restrooms/<%=item.id%>"><%=item.restaurant_name%></a> Rating: <%=item.rating%></h2>
         <% if !item.reviews.blank? %>
             <%review = item.reviews.sample%>
-            <a href="/review/<%=review.id%>">
-              <div class="">
-                <h3><%="#{review.body} #{review.stars}"%></h3>
-              </div>
-            </a>
+              <h3><%="#{review.stars} Stars - #{review.body}"%></h3>
+        <% else %>
+          No Reviews
         <% end %>
     </div>
   <% end %>

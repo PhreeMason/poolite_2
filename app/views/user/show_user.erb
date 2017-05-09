@@ -1,14 +1,14 @@
 <h2><%= @profile.username%></h2>
 <% if !@profile.reviews.blank? %>
   <% for item in @profile.reviews %>
-    <h3>
-      <%=item.restroom.restaurant_name%> - <%=item.restroom.location%> - <%=item.restroom.rating%> Stars
-    </h3>
-    <a href="/restrooms/<%=item.restroom.id%>">
-      <div class="">
-        <h3><%=item.body%> <%=item.stars%> Star(s)</h3>
-      </div>
-    </a>
+    <div class="revs">
+      <h3>
+        <a href="/restrooms/<%=item.restroom.id%>"><%=item.restroom.restaurant_name%></a> - <%=item.restroom.location%> - <%=item.restroom.rating%> Stars
+      </h3>
+      <a href="/reviews/<%=item.id%>">
+        <h4><%=item.stars%> Stars - <%=item.body%></h4>
+      </a>
+    </div>
   <% end %>
 <% else %>
   <h3>Oh no you haven't reviewed any restrooms yet!</h3>

@@ -1,16 +1,17 @@
 
 <% if @review %>
-  <h2><a href="/user/<%=@review.user.slug%>"><%=@review.user.username%></a></h2>
-  <h3><a href="/restrooms/<%=@review.restroom.id%>"><%=@review.restroom.restaurant_name%></a> - <%=@review.restroom.rating%> Stars</h3>
-  <h3><%=@review.restroom.location%></h3>
-  <h4><%=@review.body%> <%=@review.stars%> Star(s)</h4>
+  <h2>Reviewer: <a href="/user/<%=@review.user.slug%>"> <%=@review.user.username%> </a></h2>
+  <h3>Restroom Name: <a href="/restrooms/<%=@review.restroom.id%>"><%=@review.restroom.restaurant_name%></a> - <%=@review.restroom.rating%> Stars</h3>
+  <h3>Location: <%=@review.restroom.location%></h3>
+  <h4><%= @review.show_stars%></h4>
+  <p><%=@review.body%></p>
 <% end %>
 
-<% if @my_review %>
+<% if current_user.reviews.include?(@review) %>
   <form class="" action="/delete/<%=@review.id%>" method="post">
-    <input type="hidden" name="_method" value="delete" />s
+    <input type="hidden" name="_method" value="delete" />
     <input type="submit" value="Delete">
   </form>
 
-  <a href="/review/<%=@review.id%>/edit">Edit</a>
+  <a href="/reviews/<%=@review.id%>/edit">Edit</a>
 <% end %>

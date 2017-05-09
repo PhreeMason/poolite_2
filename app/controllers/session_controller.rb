@@ -16,14 +16,10 @@ class SessionController < ApplicationController
   end
 
   post "/login" do
-    user = User.find_by(:username => case_space(params[:username]))
+    user = User.find_by(:username => (params[:username]))
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      if !params[:restroom].blank?
-        redirect to "/review/new/#{params[:restroom]}"
-      else
-        redirect "user/#{user.slug}"
-      end
+      redirect "user/#{user.slug}"
     else
       flash[:message] = "Hmmm something went wrong lets try that again."
       redirect "/login"
