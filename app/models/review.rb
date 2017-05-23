@@ -1,7 +1,9 @@
 class Review < ActiveRecord::Base
   belongs_to :user
-  belongs_to :restroom
-
+  belongs_to :restroom, optional: false
+  validates :stars, presence: true
+  validates :body, presence: true
+  
   def old_restroom=(restroom)
     if !restroom.empty?
       self.restroom = Restroom.find_by(restaurant_name: restroom)

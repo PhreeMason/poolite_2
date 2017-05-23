@@ -15,9 +15,23 @@ class UserController < ApplicationController
   end
 
   post "/signup" do
-    @user = User.create(username: (params[:username]), email: params[:email], password: params[:password])
-    session[:user_id] = @user.id
-    redirect to "user/#{@user.slug}"
+    @user = User.new(username: (params[:username]), email: params[:email], password: params[:password])
+    if @user.save
+      session[:user_id] = @user.id
+      redirect to "user/#{@user.slug}"
+    else
+      flash[:message] = @user.errors.full_messages.join(', ')
+      erb :signup
+    end
+  end
+
+  get "/signup" do
+    if logged_in?
+      redirect to "user/#{current_user.slug}"
+    else
+      @user = User.new
+      erb :signup
+    end
   end
 
 end

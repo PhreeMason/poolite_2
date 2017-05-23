@@ -1,11 +1,4 @@
 class SessionController < ApplicationController
-  get "/signup" do
-    if logged_in?
-      redirect to "user/#{current_user.slug}"
-    else
-      erb :signup
-    end
-  end
 
   get "/login" do
     if logged_in?

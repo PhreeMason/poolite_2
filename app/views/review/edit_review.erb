@@ -1,4 +1,4 @@
-<h2><%=@review.restroom.restaurant_name%></h2>
+<h2><%= @review.restroom.restaurant_name %></h2>
 <h3>Edit Review:</h3>
 <form action="/review/<%=@review.id%>" id="review" method="post">
   <input type="hidden" name="_method" value="put" />

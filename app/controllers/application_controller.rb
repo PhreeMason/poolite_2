@@ -29,27 +29,7 @@ class ApplicationController < Sinatra::Base
     def case_space(string)
       string.gsub(/\s+/, "").downcase
     end
-
-    def review_fail
-      flash[:message] = "Please make sure to choose a location or add a new one and also a star rating"
-      redirect to '/review/new'
-    end
-    def stars_bod?
-      !params[:review][:stars].blank? && !params[:review][:body].blank?
-    end
-    def one_resaturant?
-      if params[:review][:restroom_hash].values.none? {|a| a.empty?}
-        return true if params[:review][:old_restroom].empty?
-      elsif !params[:review][:old_restroom].empty?
-        return true if !params[:review][:restroom_hash].values.none? {|a| a.empty?}
-      else
-        false
-      end
-    end
-    def all_good?
-      stars_bod? && one_resaturant?
-    end
-
+    
   end
 
 end

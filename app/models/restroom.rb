@@ -1,6 +1,8 @@
 class Restroom < ActiveRecord::Base
   has_many :reviews
   has_many :users, through: :reviews
+  validates :restaurant_name, presence: true
+  validates :location, presence: true
 
   def show_stars
     if !self.reviews.empty?
@@ -9,6 +11,7 @@ class Restroom < ActiveRecord::Base
       return 0
     end
   end
+  
   def rating
     if self.show_stars == 1
       return "#{self.show_stars} Star"

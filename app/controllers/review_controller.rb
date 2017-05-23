@@ -26,19 +26,14 @@ class ReviewController < ApplicationController
 
    post '/restrooms/:restroom_id/review' do
      if logged_in?
-       if stars_bod?
-        review = Review.create(params[:review])
-        current_user.reviews << review
-        review.restroom_id = params[:restroom_id]
-        if review.save
+       review = Review.create(params[:review])
+       current_user.reviews << review
+       review.restroom_id = params[:restroom_id]
+       if review.save
          redirect to "/reviews/#{review.id}"
-        else
-          flash[:message] = "Hmm something is not right, let's try that again"
-          redirect to "/restrooms/#{params[:restroom_id]}"
-        end
        else
-        flash[:message] = "It seems you forgot to pick a star rating and or write a review, please try again."
-        redirect to "/restrooms/#{params[:restroom_id]}"
+         flash[:message] = review.errors.full_messages.join(', ')
+         redirect to "/restrooms/#{params[:restroom_id]}"
        end
      else
        flash[:message] = "please login first"
@@ -48,17 +43,12 @@ class ReviewController < ApplicationController
 
    post '/review' do
      if logged_in?
-       if all_good?
-         review = current_user.reviews.build(params[:review])
-         if review.save
-           redirect to "/reviews/#{review.id}"
-         else
-          flash[:message] = "Hmm something is not right, let's try that again"
-          redirect to "review/new"
-         end
+       review = current_user.reviews.build(params[:review])
+       if review.save
+         redirect to "/reviews/#{review.id}"
        else
-         flash[:message] = "Please make sure to either choose a restroom OR fill out both fields to add a new restaurant. Don't forget a star review!"
-         redirect to "review/new"
+        flash[:message] = review.errors.full_messages.join(', ')
+        redirect to "review/new"
        end
      else
        flash[:message] = "please login first"
@@ -95,16 +85,15 @@ class ReviewController < ApplicationController
 
    put '/review/:id' do
      if logged_in?
-       if stars_bod?
-         @review= Review.find(params[:id])
-         if current_user.reviews.include?(@review)
-           @review.update(params[:review])
-         end
-         redirect to "reviews/#{@review.id}"
-       else
-         flash[:message] = "Please choose a star raiting"
-         redirect to "/reviews/#{params[:id]}/edit"
-       end
+       @review= Review.find(params[:id])
+       if current_user.reviews.include?(@review)
+          if @review.update(params[:review])
+              redirect to "reviews/#{@review.id}"
+          else
+            flash[:message] = review.errors.full_messages.join(', ')
+            redirect to "/reviews/#{params[:id]}/edit"
+          end
+        end
      else
        flash[:message] = "please login first"
        redirect to "/login"
