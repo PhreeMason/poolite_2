@@ -10,13 +10,8 @@ class ApplicationController < Sinatra::Base
   use Rack::Flash
 
   get "/" do
-    if logged_in?
-      @restrooms = Restroom.all
-      erb :index
-    else
-      @restrooms = Restroom.all
-      erb :index
-    end
+    @restrooms = Restroom.all
+    erb :index
   end
 
 
