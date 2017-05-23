@@ -1,6 +1,6 @@
-Review.destroy_all
-User.destroy_all
-Restroom.destroy_all
+# Review.destroy_all
+# User.destroy_all
+# Restroom.destroy_all
 Review.create(body: "Regular normal bathroom saw nothing special" , stars: rand(1..5))
 Review.create(body: "Bathroom had a lizard in there not sure where it came from", stars: rand(1..5))
 Review.create(body: "Finally a clean bathroom I am sick and tired of vising bathrooms that have pee on the seat" , stars: rand(1..5))

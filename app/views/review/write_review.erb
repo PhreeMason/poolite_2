@@ -2,15 +2,13 @@
 
 
 <form action="/review" method="post" id="review">
-  <% if !@restrooms.blank? %>
-    <p>Choose an existing location</p>
-    <select id="review[old_restroom]" name="review[old_restroom]">
-      <option value=""></option>
-      <%@restrooms.each do |restroom|%>
-        <option value="<%=restroom.restaurant_name%>"><%=restroom.restaurant_name%></option>
-      <%end%>
-    </select>
-  <% end %>
+  <p>Choose an existing location</p>
+  <select id="review[old_restroom]" name="review[old_restroom]">
+    <option value=""></option>
+    <%@restrooms.each do |restroom|%>
+      <option value="<%=restroom.restaurant_name%>"><%=restroom.restaurant_name%></option>
+    <%end%>
+  </select>
   <p>Add A New Restroom</p>
   <label for="name">Name: <label><br>
   <input type="text" name="review[restroom_hash][restaurant_name]" id="name" value=""><br>

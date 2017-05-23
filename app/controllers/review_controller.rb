@@ -37,7 +37,7 @@ class ReviewController < ApplicationController
           redirect to "/restrooms/#{params[:restroom_id]}"
         end
        else
-        flash[:message] = "It seems you forgot to pick a star rating, please try again."
+        flash[:message] = "It seems you forgot to pick a star rating and or write a review, please try again."
         redirect to "/restrooms/#{params[:restroom_id]}"
        end
      else
@@ -48,21 +48,16 @@ class ReviewController < ApplicationController
 
    post '/review' do
      if logged_in?
-       binding.pry
        if all_good?
-         binding.pry
          review = current_user.reviews.build(params[:review])
          if review.save
-           binding.pry
            redirect to "/reviews/#{review.id}"
          else
-           binding.pry
           flash[:message] = "Hmm something is not right, let's try that again"
           redirect to "review/new"
          end
        else
-         binding.pry
-         flash[:message] = "Please make sure to either choose a restroom OR fillout both fields to add a new restaurant. Dont forget a star review!"
+         flash[:message] = "Please make sure to either choose a restroom OR fill out both fields to add a new restaurant. Don't forget a star review!"
          redirect to "review/new"
        end
      else
@@ -100,7 +95,6 @@ class ReviewController < ApplicationController
 
    put '/review/:id' do
      if logged_in?
-       binding.pry
        if stars_bod?
          @review= Review.find(params[:id])
          if current_user.reviews.include?(@review)

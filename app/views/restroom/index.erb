@@ -5,7 +5,7 @@
       <h2><a href="/restrooms/<%=item.id%>"><%=item.restaurant_name%></a> Rating: <%=item.rating%></h2>
         <% if !item.reviews.blank? %>
             <%review = item.reviews.sample%>
-              <h3><%="#{review.stars} Stars - #{review.body}"%></h3>
+              <h3><%="#{review.show_stars} - #{review.body}"%></h3>
         <% else %>
           No Reviews
         <% end %>

@@ -17,7 +17,7 @@ class Review < ActiveRecord::Base
   end
 
   def show_stars
-    if self.stars == '1'
+    if self.stars == 1
       return "#{self.stars} Star"
     else
       return "#{self.stars} Stars"
